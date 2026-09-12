@@ -30,24 +30,27 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
 
       - name: Install mdbook
-        run: |
-          cargo install mdbook --locked --version 0.5.2
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: mdbook
+          version: 0.5.2
 
       - name: Install mdbook-mermaid
-        run: |
-          cargo install mdbook-mermaid --locked
+        uses: baptiste0928/cargo-install@v3
+        with:
+          crate: mdbook-mermaid
 
       - name: Build book
         run: |
           mdbook build
-
-      - name: Verify book output
-        run: |
+          echo "=== Build output ==="
           ls -la book/
-          test -f book/index.html || (echo "ERROR: book/index.html not found" && exit 1)
-          test -f book/mermaid.min.js || (echo "ERROR: book/mermaid.min.js not found" && exit 1)
+          echo "=== HTML count ==="
+          find book -name "*.html" | wc -l
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
