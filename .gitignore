@@ -1,8 +1,8 @@
 # mdbook 构建产物
 book/
 
-# mdbook-mermaid 输出
-mermaid-*.js
+# mdbook-mermaid 输出 ( hash 后版本, 例如 mermaid-init-abc123.js )
+mermaid-???????.js
 
 # 编辑器临时文件
 *.swp
