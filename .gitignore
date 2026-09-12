@@ -1,6 +1,3 @@
-# mdbook 构建产物
-book/
-
 # mdbook-mermaid 输出 ( hash 后版本, 例如 mermaid-init-abc123.js )
 mermaid-???????.js
 
@@ -12,3 +9,5 @@ mermaid-???????.js
 # Rust / Cargo
 target/
 Cargo.lock
+
+# 注意: book/ 不在 .gitignore, 因为方案 A 直接推送编译产物作为 Pages
