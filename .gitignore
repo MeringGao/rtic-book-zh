@@ -1,0 +1,14 @@
+# mdbook 构建产物
+book/
+
+# mdbook-mermaid 输出
+mermaid-*.js
+
+# 编辑器临时文件
+*.swp
+*~
+.DS_Store
+
+# Rust / Cargo
+target/
+Cargo.lock
