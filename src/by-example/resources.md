@@ -25,7 +25,7 @@ RTIC 资源仅对 `#[app]` 模块内声明的函数可见, 框架让用户可以
 下方示例应用包含三个任务 `foo`, `bar` 和 `idle`, 每个任务都可以访问它自己的 `#[local]` 资源.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/locals.rs}}
+{{#include ../../examples/lm3s6965/examples/locals.rs}}
 ```
 
 运行该示例:
@@ -35,7 +35,7 @@ $ cargo xtask qemu --verbose --example locals
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/locals.run}}
+{{#include ../../ci/expected/lm3s6965/locals.run}}
 ```
 
 `#[init]` 和 `#[idle]` 中的本地资源具有 `'static` 生命周期. 这一点是安全的, 因为这两个任务都是不可重入的.
@@ -51,7 +51,7 @@ $ cargo xtask qemu --verbose --example locals
 下面的示例展示了不同的用法和生命周期:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/declared_locals.rs}}
+{{#include ../../examples/lm3s6965/examples/declared_locals.rs}}
 ```
 
 你可以运行该应用, 但由于该示例只是为了演示生命周期特性, 不会有任何输出 (编译过即可).
@@ -60,14 +60,14 @@ $ cargo xtask qemu --verbose --example locals
 $ cargo build --target thumbv7m-none-eabi --example declared_locals
 ```
 
-<!-- {{#include ../../../../ci/expected/lm3s6965/declared_locals.run}} -->
+<!-- {{#include ../../ci/expected/lm3s6965/declared_locals.run}} -->
 
 ## `#[shared]` 资源与 `lock`
 
 访问 `#[shared]` 资源需要临界区, 以避免数据竞争. 为此, 所传入 `Context` 的 `shared` 字段为每个任务可访问的共享资源实现了 [`Mutex`] trait. 该 trait 只有一个方法 [`lock`], 它会在临界区中运行其闭包参数.
 
-[`Mutex`]: ../../../api/rtic/trait.Mutex.html
-[`lock`]: ../../../api/rtic/trait.Mutex.html#method.lock
+[`Mutex`]: ../../api/rtic/trait.Mutex.html
+[`lock`]: ../../api/rtic/trait.Mutex.html#method.lock
 
 `lock` API 所创建的临界区基于动态优先级: 它会将上下文的动态优先级临时提升到一个 _上限_ 优先级, 防止其他任务抢占该临界区. 这种同步协议被称为 [Immediate Ceiling Priority Protocol (ICPP)][icpp], 符合 RTIC 基于 [Stack Resource Policy (SRP)][srp] 的调度.
 
@@ -77,7 +77,7 @@ $ cargo build --target thumbv7m-none-eabi --example declared_locals
 在下面的示例中, 我们有三个优先级从一到三的中断处理函数. 两个较低优先级的中断处理函数会争抢一个 `shared` 资源, 它们必须成功锁定资源才能访问其数据. 最高优先级的中断处理函数不访问 `shared` 资源, 因此它可以自由地抢占由最低优先级处理函数创建的临界区.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/lock.rs}}
+{{#include ../../examples/lm3s6965/examples/lock.rs}}
 ```
 
 ```console
@@ -85,7 +85,7 @@ $ cargo xtask qemu --verbose --example lock
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/lock.run}}
+{{#include ../../ci/expected/lm3s6965/lock.run}}
 ```
 
 `#[shared]` 资源的类型必须是 [`Send`].
@@ -95,7 +95,7 @@ $ cargo xtask qemu --verbose --example lock
 作为 `lock` 的扩展, 为了减少向右缩进, 锁可以以元组形式获取. 下面的示例展示了这种用法:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/multilock.rs}}
+{{#include ../../examples/lm3s6965/examples/multilock.rs}}
 ```
 
 ```console
@@ -103,7 +103,7 @@ $ cargo xtask qemu --verbose --example multilock
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/multilock.run}}
+{{#include ../../ci/expected/lm3s6965/multilock.run}}
 ```
 
 ## 仅共享 (`&-`) 访问
@@ -117,7 +117,7 @@ $ cargo xtask qemu --verbose --example multilock
 在下面的示例中, 一个 key (例如加密密钥) 在运行时被加载 (或创建) (由 `init` 返回), 然后被两个在不同优先级上运行的任务使用, 不需要任何锁.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/only-shared-access.rs}}
+{{#include ../../examples/lm3s6965/examples/only-shared-access.rs}}
 ```
 
 ```console
@@ -125,7 +125,7 @@ $ cargo xtask qemu --verbose --example only-shared-access
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/only-shared-access.run}}
+{{#include ../../ci/expected/lm3s6965/only-shared-access.run}}
 ```
 
 ## 共享资源的无锁访问
@@ -142,7 +142,7 @@ $ cargo xtask qemu --verbose --example only-shared-access
 在由不同优先级运行的任务共享的资源上使用 `#[lock_free]` 将导致 _编译时_ 错误, 因为不使用 `lock` API 会违反上述别名规则. 同样, 对于每个优先级, 只能有单个 _software_ 任务访问某个共享资源 (因为 `async` 任务可能会让出执行权给同优先级的其他 _software_ 或 _hardware_ 任务). 然而, 在这个单任务限制下, 我们观察到该资源实际上不再是 `shared`, 而是 `local`. 因此, 对一个 `#[lock_free]` 共享资源使用 `#[lock_free]` 将导致 _编译时_ 错误, 在适用的情况下请改用 `#[local]` 资源.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/lock-free.rs}}
+{{#include ../../examples/lm3s6965/examples/lock-free.rs}}
 ```
 
 ```console
@@ -150,5 +150,5 @@ $ cargo xtask qemu --verbose --example lock-free
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/lock-free.run}}
+{{#include ../../ci/expected/lm3s6965/lock-free.run}}
 ```

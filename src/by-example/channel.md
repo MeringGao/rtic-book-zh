@@ -49,7 +49,7 @@ async fn receiver(_c: receiver::Context, mut receiver: Receiver<'static, u32, CA
 完整的示例:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-channel.rs}}
+{{#include ../../examples/lm3s6965/examples/async-channel.rs}}
 ```
 
 ```console
@@ -57,7 +57,7 @@ $ cargo xtask qemu --verbose --example async-channel
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-channel.run}}
+{{#include ../../ci/expected/lm3s6965/async-channel.run}}
 ```
 
 发送端点也可以被 `await`. 如果通道容量尚未达到上限, `await` 发送端可以立即推进, 而在容量已满的情况下, 发送端会一直阻塞直到队列中有空闲位置. 这样数据就永远不会丢失.
@@ -65,7 +65,7 @@ $ cargo xtask qemu --verbose --example async-channel
 在下面的示例中, `CAPACITY` 被减少到 1, 这强制发送任务等待直到通道中的数据被接收.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-channel-done.rs}}
+{{#include ../../examples/lm3s6965/examples/async-channel-done.rs}}
 ```
 
 查看输出, 我们会发现 `Sender 2` 将一直等待, 直到 `Sender 1` 发送的数据被接收.
@@ -74,7 +74,7 @@ $ cargo xtask qemu --verbose --example async-channel
 
 ```console
 $ cargo xtask qemu --verbose --example async-channel-done
-{{#include ../../../../ci/expected/lm3s6965/async-channel-done.run}}
+{{#include ../../ci/expected/lm3s6965/async-channel-done.run}}
 ```
 
 ## 错误处理
@@ -82,7 +82,7 @@ $ cargo xtask qemu --verbose --example async-channel-done
 如果所有发送端都已 drop, 则 `await` 一个空的接收通道会导致错误. 这允许优雅地实现不同类型的关闭操作.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-channel-no-sender.rs}}
+{{#include ../../examples/lm3s6965/examples/async-channel-no-sender.rs}}
 ```
 
 ```console
@@ -90,7 +90,7 @@ $ cargo xtask qemu --verbose --example async-channel-no-sender
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-channel-no-sender.run}}
+{{#include ../../ci/expected/lm3s6965/async-channel-no-sender.run}}
 ```
 
 类似地, 如果接收端已被 drop, `await` 一个发送通道会导致错误. 这允许优雅地实现应用级错误处理.
@@ -98,7 +98,7 @@ $ cargo xtask qemu --verbose --example async-channel-no-sender
 产生的错误会将数据返回给发送端, 允许发送端采取适当的操作 (例如将数据存储起来以便稍后重发).
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-channel-no-receiver.rs}}
+{{#include ../../examples/lm3s6965/examples/async-channel-no-receiver.rs}}
 ```
 
 ```console
@@ -106,7 +106,7 @@ $ cargo xtask qemu --verbose --example async-channel-no-receiver
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-channel-no-receiver.run}}
+{{#include ../../ci/expected/lm3s6965/async-channel-no-receiver.run}}
 ```
 
 ## Try API
@@ -116,7 +116,7 @@ $ cargo xtask qemu --verbose --example async-channel-no-receiver
 该 API 通过 `Receiver::try_recv` 和 `Sender::try_send` 暴露.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-channel-try.rs}}
+{{#include ../../examples/lm3s6965/examples/async-channel-try.rs}}
 ```
 
 ```console
@@ -124,5 +124,5 @@ $ cargo xtask qemu --verbose --example async-channel-try
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-channel-try.run}}
+{{#include ../../ci/expected/lm3s6965/async-channel-try.run}}
 ```

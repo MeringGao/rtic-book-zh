@@ -8,7 +8,7 @@
 
 `app` 属性会展开为合适的入口点, 从而取代 [`cortex_m_rt::entry`] 属性的使用.
 
-[`app`]: ../../../api/rtic_macros/attr.app.html
+[`app`]: ../../api/rtic_macros/attr.app.html
 [`svd2rust`]: https://crates.io/crates/svd2rust
 [`cortex_m_rt::entry`]: https://docs.rs/cortex-m-rt-macros/latest/cortex_m_rt_macros/attr.entry.html
 
@@ -42,5 +42,5 @@ RTIC 中的优先级遵循 _值越大越重要_ 的方案. 例如, 优先级为 
 在接下来的章节中, 我们将逐一详细介绍每个特性.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/common.rs}}
+{{#include ../../examples/lm3s6965/examples/common.rs}}
 ```

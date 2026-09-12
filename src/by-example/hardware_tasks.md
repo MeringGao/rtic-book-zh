@@ -20,7 +20,7 @@ RTIC 的核心是使用硬件中断控制器 (cortex-m 上的 [ARM NVIC][NVIC]) 
 下面的示例演示了使用 `#[task(binds = InterruptName)]` 属性来声明一个绑定到中断处理函数的硬件任务.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/hardware.rs}}
+{{#include ../../examples/lm3s6965/examples/hardware.rs}}
 ```
 
 ```console
@@ -28,5 +28,5 @@ $ cargo xtask qemu --verbose --example hardware
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/hardware.run}}
+{{#include ../../ci/expected/lm3s6965/hardware.run}}
 ```

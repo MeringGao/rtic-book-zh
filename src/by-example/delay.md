@@ -16,7 +16,7 @@ RTIC 中所有单调时钟的实现都保证在硬件寿命之内保持稳定, �
 
 ```rust,noplayground
 ...
-{{#include ../../../../examples/lm3s6965/examples/async-timeout.rs:init}}
+{{#include ../../examples/lm3s6965/examples/async-timeout.rs:init}}
         ...
 ```
 
@@ -36,7 +36,7 @@ async fn foo(_cx: foo::Context) {
 <summary>完整示例</summary>
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-delay.rs}}
+{{#include ../../examples/lm3s6965/examples/async-delay.rs}}
 ```
 
 ```console
@@ -44,7 +44,7 @@ $ cargo xtask qemu --verbose --example async-delay
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-delay.run}}
+{{#include ../../ci/expected/lm3s6965/async-delay.run}}
 ```
 
 </details>
@@ -63,7 +63,7 @@ Rust 的 [`Future`] (底层是 Rust 的 `async`/`await`) 是可组合的. 这使
 使用 `futures` crate 中的 `select_biased` 宏, 它可能看起来像这样:
 
 ```rust,noplayground,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-timeout.rs:select_biased}}
+{{#include ../../examples/lm3s6965/examples/async-timeout.rs:select_biased}}
 ```
 
 假设 `hal_get` 将耗时 450ms 完成, 那么 200ms 的短超时将在 `hal_get` 完成之前到期.
@@ -73,7 +73,7 @@ Rust 的 [`Future`] (底层是 Rust 的 `async`/`await`) 是可组合的. 这使
 `select_biased` 可以组合任意数量的 future, 因此非常强大. 然而, 由于超时模式经常被使用, RTIC 内置了更符合人体工学的支持, 由 [`rtic-monotonics`] 和 [`rtic-time`] crate 提供. 下面是另一个示例, 使用 `Mono::delay_until` 和 `Mono::timeout_after`:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-timeout.rs:timeout_at_basic}}
+{{#include ../../examples/lm3s6965/examples/async-timeout.rs:timeout_at_basic}}
 ```
 
 在需要对时间进行精确控制 (无漂移) 的情况下, 我们可以使用 `Instant` 来表示精确的时间点, 使用 `Duration` 来表示时间跨度. 对 `Instant` 和 `Duration` 类型的操作来自 [`fugit`] crate.
@@ -92,7 +92,7 @@ Rust 的 [`Future`] (底层是 Rust 的 `async`/`await`) 是可组合的. 这使
 <summary>完整示例</summary>
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/async-timeout.rs}}
+{{#include ../../examples/lm3s6965/examples/async-timeout.rs}}
 ```
 
 ```console
@@ -100,7 +100,7 @@ $ cargo xtask qemu --verbose --example async-timeout
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/async-timeout.run}}
+{{#include ../../ci/expected/lm3s6965/async-timeout.run}}
 ```
 
 </details>

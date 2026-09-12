@@ -82,7 +82,7 @@ Timer with period zero, disable
 注意输出末尾 `Stdout:` 后面的内容, 程序输出应该包含这些行:
 
 ```console
-{{#include ../../../ci/expected/lm3s6965/locals.run}}
+{{#include ../ci/expected/lm3s6965/locals.run}}
 ```
 
 > **注意**:

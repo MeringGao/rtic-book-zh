@@ -33,12 +33,12 @@ Task Priority
 下面的示例展示了基于优先级的任务调度:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/preempt.rs}}
+{{#include ../../examples/lm3s6965/examples/preempt.rs}}
 ```
 
 ```console
 $ cargo xtask qemu --verbose --example preempt
-{{#include ../../../../ci/expected/lm3s6965/preempt.run}}
+{{#include ../../ci/expected/lm3s6965/preempt.run}}
 ```
 
 注意, 任务 `bar` 并 _不会_ 抢占任务 `baz`, 因为它的优先级与 `baz` _相同_. `bar` 在 `baz` 返回后先于 `foo` 运行. 当 `bar` 返回时, `foo` 可以恢复执行.

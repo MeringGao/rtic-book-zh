@@ -10,10 +10,10 @@
 任务的参数数量没有限制:
 
 ``` rust,noplayground
-{{#include ../../../../examples/message_passing.rs}}
+{{#include ../../examples/message_passing.rs}}
 ```
 
 ``` console
 $ cargo xtask qemu --verbose --example message_passing
-{{#include ../../../../ci/expected/message_passing.run}}
+{{#include ../../ci/expected/message_passing.run}}
 ```

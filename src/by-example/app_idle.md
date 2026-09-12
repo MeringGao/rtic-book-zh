@@ -12,7 +12,7 @@
 下面的示例显示了 `idle` 在 `init` 之后运行.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/idle.rs}}
+{{#include ../../examples/lm3s6965/examples/idle.rs}}
 ```
 
 ```console
@@ -20,7 +20,7 @@ $ cargo xtask qemu --verbose --example idle
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/idle.run}}
+{{#include ../../ci/expected/lm3s6965/idle.run}}
 ```
 
 默认情况下, RTIC 的 `idle` 任务不会尝试针对任何特定目标进行优化.
@@ -39,7 +39,7 @@ $ cargo xtask qemu --verbose --example idle
 [NOP]: https://developer.arm.com/documentation/dui0662/b/The-Cortex-M0--Instruction-Set/Miscellaneous-instructions/NOP
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/idle-wfi.rs}}
+{{#include ../../examples/lm3s6965/examples/idle-wfi.rs}}
 ```
 
 ```console
@@ -47,7 +47,7 @@ $ cargo xtask qemu --verbose --example idle-wfi
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/idle-wfi.run}}
+{{#include ../../ci/expected/lm3s6965/idle-wfi.run}}
 ```
 
 > **注意**: `idle` 任务不能与运行在优先级零的 _software_ 任务一起使用. 原因是 `idle` 以永不返回的 Rust 函数运行在优先级零, 那么优先级零的执行器就无法将控制权交给同优先级的 _software_ 任务.

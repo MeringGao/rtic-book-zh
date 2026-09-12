@@ -1,0 +1,5 @@
+[target.thumbv7em-none-eabihf]
+runner = "python3 run.py"
+
+[build]
+target = "thumbv7em-none-eabihf" # Teensy 4

@@ -18,7 +18,7 @@ RTIC 应用需要一个 `init` 任务来设置系统. 对应的 `init` 函数必
 在极少数情况下, 如果你想要实现一个超精简的应用, 你可以显式将 `peripherals` 设为 `false`.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/init.rs}}
+{{#include ../../examples/lm3s6965/examples/init.rs}}
 ```
 
 运行该示例将向控制台打印 `init`, 然后退出 QEMU 进程.
@@ -28,5 +28,5 @@ $ cargo xtask qemu --verbose --example init
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/init.run}}
+{{#include ../../ci/expected/lm3s6965/init.run}}
 ```

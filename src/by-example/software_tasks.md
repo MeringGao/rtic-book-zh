@@ -23,7 +23,7 @@ _software_ 任务假定运行到完成 (并返回), 而 _software_ 任务可以�
 请看下面的示例:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/spawn.rs}}
+{{#include ../../examples/lm3s6965/examples/spawn.rs}}
 ```
 
 ```console
@@ -31,7 +31,7 @@ $ cargo xtask qemu --verbose --example spawn
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/spawn.run}}
+{{#include ../../ci/expected/lm3s6965/spawn.run}}
 ```
 
 只要 _software_ 任务已经运行到完成 (返回), 你就可以再次 `spawn` 它.
@@ -41,7 +41,7 @@ $ cargo xtask qemu --verbose --example spawn
 从技术上讲, 异步执行器会对 `foo` _future_ 进行 `poll`, 在这种情况下, _future_ 会停留在 _completed_ 状态.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/spawn_loop.rs}}
+{{#include ../../examples/lm3s6965/examples/spawn_loop.rs}}
 ```
 
 ```console
@@ -49,7 +49,7 @@ $ cargo xtask qemu --verbose --example spawn_loop
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/spawn_loop.run}}
+{{#include ../../ci/expected/lm3s6965/spawn_loop.run}}
 ```
 
 尝试对一个已经派生 (正在运行) 的任务再次 `spawn` 将导致错误. 注意, 错误是在 `foo` 任务实际运行之前报告的. 这是因为 _software_ 任务的实际执行由 dispatcher 中断 (`SSIO`) 处理, 而该中断直到我们退出 `init` 任务才被启用. (记住, `init` 在临界区运行, 即所有中断都被禁用.)
@@ -57,7 +57,7 @@ $ cargo xtask qemu --verbose --example spawn_loop
 从技术上讲, 对一个不处于 _completed_ 状态的 _future_ 进行 `spawn` 被视为错误.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/spawn_err.rs}}
+{{#include ../../examples/lm3s6965/examples/spawn_err.rs}}
 ```
 
 ```console
@@ -65,7 +65,7 @@ $ cargo xtask qemu --verbose --example spawn_err
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/spawn_err.run}}
+{{#include ../../ci/expected/lm3s6965/spawn_err.run}}
 ```
 
 ## 传递参数
@@ -73,7 +73,7 @@ $ cargo xtask qemu --verbose --example spawn_err
 你也可以在 spawn 时传递参数, 如下所示.
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/spawn_arguments.rs}}
+{{#include ../../examples/lm3s6965/examples/spawn_arguments.rs}}
 ```
 
 ```console
@@ -81,7 +81,7 @@ $ cargo xtask qemu --verbose --example spawn_arguments
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/spawn_arguments.run}}
+{{#include ../../ci/expected/lm3s6965/spawn_arguments.run}}
 ```
 
 ## 永不返回的任务
@@ -97,7 +97,7 @@ $ cargo xtask qemu --verbose --example spawn_arguments
 [Send]: https://doc.rust-lang.org/nomicon/send-and-sync.html
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/zero-prio-task.rs}}
+{{#include ../../examples/lm3s6965/examples/zero-prio-task.rs}}
 ```
 
 ```console
@@ -105,7 +105,7 @@ $ cargo xtask qemu --verbose --example zero-prio-task
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/zero-prio-task.run}}
+{{#include ../../ci/expected/lm3s6965/zero-prio-task.run}}
 ```
 
 > **注意**: 优先级为零的 _software_ 任务不能与 [idle] 任务共存. 原因是 `idle` 以永不返回的 Rust 函数运行在优先级零, 那么优先级零的执行器就无法将控制权交给同优先级的 _software_ 任务.

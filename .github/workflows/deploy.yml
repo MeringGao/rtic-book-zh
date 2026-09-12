@@ -41,15 +41,13 @@ jobs:
 
       - name: Build book
         run: |
-          cd book/zh 2>/dev/null || cd .
           mdbook build
 
-      - name: Copy mermaid assets to book
+      - name: Verify book output
         run: |
-          if [ ! -f book/mermaid.min.js ]; then
-            cp mermaid.min.js book/ 2>/dev/null || true
-            cp mermaid-init.js book/ 2>/dev/null || true
-          fi
+          ls -la book/
+          test -f book/index.html || (echo "ERROR: book/index.html not found" && exit 1)
+          test -f book/mermaid.min.js || (echo "ERROR: book/mermaid.min.js not found" && exit 1)
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

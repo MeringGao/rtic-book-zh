@@ -3,7 +3,7 @@
 这是最小可能的 RTIC 应用:
 
 ```rust,noplayground
-{{#include ../../../../examples/lm3s6965/examples/smallest.rs}}
+{{#include ../../examples/lm3s6965/examples/smallest.rs}}
 ```
 
 RTIC 在设计时考虑了资源效率. RTIC 本身不依赖于任何动态内存分配, 因此 RAM 需求仅取决于应用. Flash 内存占用低于 1kB (包括中断向量表).
@@ -15,7 +15,7 @@ $ cargo xtask size --example smallest --backend thumbv7
 ```
 
 ```console
-{{#include ../../../../ci/expected/lm3s6965/smallest.size}}
+{{#include ../../ci/expected/lm3s6965/smallest.size}}
 ```
 
 <!-- ---

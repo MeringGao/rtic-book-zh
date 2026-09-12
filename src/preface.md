@@ -7,7 +7,7 @@
 
 # 前言
 
-本书包含实时中断驱动并发 (RTIC) 框架的用户级文档. API 参考见 [这里](../../api/).
+本书包含实时中断驱动并发 (RTIC) 框架的用户级文档. API 参考见 [这里](../api/).
 
 这是 RTIC v2.x 的文档.
 
@@ -17,7 +17,7 @@
 [v0_5]: https://github.com/rtic-rs/rtic/tree/release/v0.5
 [v0_4]: https://github.com/rtic-rs/rtic/tree/release/v0.4
 
-{{#include ../../../README.md:7:12}}
+{{#include ../README.md:7:12}}
 
 ## RTIC 是 RTOS 吗?
 

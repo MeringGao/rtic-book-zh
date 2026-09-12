@@ -9,7 +9,7 @@
 [`heapless::spsc::Queue`]: https://docs.rs/heapless/0.7.5/heapless/spsc/struct.Queue.html
 
 ```rust,noplayground
-{{#include ../../../../../examples/lm3s6965/examples/static-resources-in-init.rs}}
+{{#include ../../../examples/lm3s6965/examples/static-resources-in-init.rs}}
 ```
 
 运行这个程序会产生预期的输出.
@@ -19,5 +19,5 @@ $ cargo xtask qemu --verbose --example static-resources-in-init
 ```
 
 ```console
-{{#include ../../../../../ci/expected/lm3s6965/static-resources-in-init.run}}
+{{#include ../../../ci/expected/lm3s6965/static-resources-in-init.run}}
 ```

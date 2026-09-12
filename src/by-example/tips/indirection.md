@@ -13,7 +13,7 @@
 下面是一个使用 `heapless::Pool` 来 "装箱" 128 字节缓冲区的示例.
 
 ```rust,noplayground
-{{#include ../../../../../examples/lm3s6965/examples/pool.rs}}
+{{#include ../../../examples/lm3s6965/examples/pool.rs}}
 ```
 
 ```console
@@ -21,5 +21,5 @@ $ cargo xtask qemu --verbose --example pool
 ```
 
 ```console
-{{#include ../../../../../ci/expected/lm3s6965/pool.run}}
+{{#include ../../../ci/expected/lm3s6965/pool.run}}
 ```

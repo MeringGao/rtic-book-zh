@@ -87,7 +87,7 @@ mod app {
 # V2.0.0
 
 ``` rust,noplayground
-{{ #include ../../../../examples/stm32f3_blinky/src/main.rs }}
+{{ #include ../../examples/stm32f3_blinky/src/main.rs }}
 ```
 
 ## 两个项目之间的 diff
