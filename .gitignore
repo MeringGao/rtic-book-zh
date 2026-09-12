@@ -5,9 +5,3 @@ mermaid-???????.js
 *.swp
 *~
 .DS_Store
-
-# Rust / Cargo
-target/
-Cargo.lock
-
-# 注意: book/ 不在 .gitignore, 因为方案 A 直接推送编译产物作为 Pages
